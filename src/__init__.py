@@ -26,5 +26,6 @@ def create_app(test_config=None):
     JWTManager(app)
 
     app.register_blueprint(auth)
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL").replace('postgres://', 'postgresql://')
 
     return app
