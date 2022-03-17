@@ -1,4 +1,3 @@
-import imp
 from flask import Flask, jsonify
 import os
 from src.auth import auth
@@ -13,7 +12,7 @@ def create_app(test_config=None):
 
         app.config.from_mapping(
             SECRET_KEY=os.environ.get('SECRET_KEY'),
-            SQLALCHEMY_DATABASE_URI= 'postgresql+psycopg2://moringa:passdb@localhost/zen',
+            SQLALCHEMY_DATABASE_URI=os.environ.get("DATABASE_URL").replace('postgres://', 'postgresql://'),
             SQLALCHEMY_TRACK_MODIFICATIONS=False,
             JWT_SECRET_KEY=os.environ.get('JWT_SECRET_KEY')
         )
